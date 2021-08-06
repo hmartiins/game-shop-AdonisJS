@@ -6,3 +6,10 @@ Route.group(() => {
   Route.delete('/games/:id', 'GamesController.delete')
   Route.put('/games/:id', 'GamesController.update')
 })
+
+Route.group(() => {
+  Route.post('/users', 'UsersController.create')
+  Route.get('/users', 'UsersController.index')
+  Route.delete('/users/:id', 'UsersController.delete')
+  Route.put('/users/:id', 'UsersController.update')
+})

@@ -17,11 +17,16 @@ export default class UsersController {
       password,
     })
 
+    // @ts-expect-error ⠀⠀⠀
+    delete user.password
+
     return response.status(201).send(user)
   }
 
-  public async index() {
-    return await User.all()
+  public async index({ response }: HttpContextContract) {
+    const user = await User.query().select('id', 'name', 'email', 'created_at', 'updated_at')
+
+    return response.status(200).send(user)
   }
 
   public async delete({ request, response }: HttpContextContract) {
@@ -51,6 +56,9 @@ export default class UsersController {
       email,
       password,
     })
+
+    // @ts-expect-error ⠀⠀⠀
+    delete userUpdated.password
 
     return userUpdated
   }

@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
+import Hash from '@ioc:Adonis/Core/Hash'
 import User from 'App/Models/User'
 
 export default class UsersController {
@@ -61,5 +62,22 @@ export default class UsersController {
     delete userUpdated.password
 
     return userUpdated
+  }
+
+  public async login({ auth, response, request }: HttpContextContract) {
+    const { email, password } = request.only(['email', 'password'])
+
+    try {
+      const user = await User.query().where('email', email).firstOrFail()
+      if (!(await Hash.verify(user.password, password))) {
+        return response.status(401).send({ error: 'Invalid credentials' })
+      }
+
+      const token = await auth.use('api').generate(user)
+
+      return token
+    } catch (err) {
+      return response.status(401).send({ error: 'Invalid credentials' })
+    }
   }
 }

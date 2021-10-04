@@ -9,6 +9,7 @@ Route.group(() => {
 
 Route.group(() => {
   Route.post('/users/login', 'UsersController.login')
+  Route.post('/users/logout', 'UsersController.logout')
   Route.post('/users', 'UsersController.create')
   Route.get('/users', 'UsersController.index')
   Route.delete('/users/:id', 'UsersController.delete')

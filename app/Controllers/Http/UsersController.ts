@@ -73,11 +73,21 @@ export default class UsersController {
         return response.status(401).send({ error: 'Invalid credentials' })
       }
 
-      const token = await auth.use('api').generate(user)
+      const token = await auth.use('api').generate(user, {
+        expiresIn: '1day',
+      })
 
       return token
     } catch (err) {
       return response.status(401).send({ error: 'Invalid credentials' })
+    }
+  }
+
+  public async logout({ auth }: HttpContextContract) {
+    await auth.use('api').revoke()
+
+    return {
+      revoked: true,
     }
   }
 }

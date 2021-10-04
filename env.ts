@@ -20,4 +20,7 @@ export default Env.rules({
   APP_KEY: Env.schema.string(),
   APP_NAME: Env.schema.string(),
   NODE_ENV: Env.schema.enum(['development', 'production', 'testing'] as const),
+  SESSION_DRIVER: Env.schema.string(),
+  STRIPE_PUBLIC_KEY: Env.schema.string(),
+  STRIPE_SECRET_KEY: Env.schema.string(),
 })

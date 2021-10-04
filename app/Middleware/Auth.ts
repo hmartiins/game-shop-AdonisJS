@@ -3,7 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { AuthenticationException } from '@adonisjs/auth/build/standalone'
 
 export default class AuthMiddleware {
-  protected redirectTo = '/login'
+  protected redirectTo = '/users/login'
   protected async authenticate(auth: HttpContextContract['auth'], guards: (keyof GuardsList)[]) {
     let guardLastAttempted: string | undefined
 

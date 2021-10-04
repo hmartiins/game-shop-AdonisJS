@@ -15,3 +15,7 @@ Route.group(() => {
   Route.delete('/users/:id', 'UsersController.delete')
   Route.put('/users/:id', 'UsersController.update')
 })
+
+Route.group(() => {
+  Route.post('/game/buy/:id', 'GameShopsController.buyGame')
+})
